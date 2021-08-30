@@ -1,0 +1,79 @@
+<html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js'></script>
+<!-- 2019-01-21 https://cdnjs.com/libraries/vue -->
+
+<body>
+
+    <div id="vue_example"></div>
+
+    <script>
+        var vue_example = new Vue({
+            el: '#vue_example',
+
+            // template: `<div>
+            //     <ol><li v-for="(it,idx) in items">
+            //     {{ it }} <button v-on:click="del_item( idx )"> x </button>
+            //     </li></ol>
+            //     <input v-model="item" />
+            //     <button v-on:click="add_item()">Add Item</button>
+            //     </div>`,
+
+
+            // template: `<div>
+            //     <ol><li v-for="(value,i) in items">
+            //     {{ value }} <button v-on:click="del_item( i )"> x </button>
+            //     </li></ol>
+            //     <input v-model="item" />
+            //     <button v-on:click="add_item()">Add Item</button>
+            //     </div>`,
+
+            template: `<div>
+                <h1>{{ errorText }}</h1>
+                <ol><li v-for="(value,i) in search">
+                {{ value }} <button v-on:click="del_item( i )"> x </button>
+                </li></ol>
+                <input v-model="item" />
+                <button v-on:click="add_item()">Add Item</button>
+                </div>`,
+
+            data: {
+                items: ['aaa', 'bbb', 'ccc',],
+                item: 'Hello Vue.js!',
+                errorText:""
+            },
+
+            methods: {
+                add_item: function () { 
+                    // this.items.push(this.item)
+                    if(this.item.length > 0)
+                    {
+                        this.errorText = "";
+                        this.items.push(this.item) 
+                    }
+                    else
+                    {
+                        this.errorText = "error";
+                    }
+                },
+                del_item: function (_idx) {
+                    if(this.errorText == "error")
+                    {
+                        this.errorText = "";
+                    }
+                    this.items.splice(_idx, 1) 
+                }
+            },
+
+            computed: {
+                search: function () {
+                    return this.items.filter(function (i) {
+                        return i.length > 0;
+                    })
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

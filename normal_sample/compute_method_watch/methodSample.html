@@ -1,0 +1,36 @@
+<!DOCTYPE>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js_test01</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="firstName" placeholder="firstName">
+        <input v-model="lastName" placeholder="lastName">
+        <p>firstName: {{ firstName }}</p>
+        <p>lastName: {{ lastName }}</p>
+        <p>fullName: {{ fullName() }}</p>
+        <p>now: {{ now() }}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                firstName: '',
+                lastName: ''
+            },
+            methods: {
+                fullName: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                now: function () {
+                    return Date.now()
+                }
+            }
+        })
+    </script>
+</body>
